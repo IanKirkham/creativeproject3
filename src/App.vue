@@ -16,7 +16,7 @@
       <router-link class="nav-item" to="/watchlist">
         <div class="menu-item">
           <i class="fas fa-ticket-alt"></i>
-          <span class='badge' id='watchlistCount'>0</span>
+          <span class='badge' id='watchlistCount'>{{watchlistSize}}</span>
           <p>My Watchlist</p>
         </div>
       </router-link>
@@ -24,6 +24,21 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    watchlistSize() {
+      if (this.$root.$data.watchlist.length === undefined) {
+        return 0;
+      }
+      else {
+        return this.$root.$data.watchlist.length;
+      }
+    }
+  }
+}
+</script>
 
 <style>
 

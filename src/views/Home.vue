@@ -1,9 +1,10 @@
 <template>
   <div class="home">
     <div v-if="loading">
-      <p> Loading... </p>
+      <p class="loading-msg"> Loading... </p>
     </div>
     <div v-else>
+      <h1 class="title">Popular Movies</h1>
       <MovieList :movies="movies"/>
     </div>
   </div>
@@ -31,3 +32,16 @@ export default {
   }
 }
 </script>
+
+<style>
+.title {
+  margin-top: 1em;
+  font-size: 2.5em;
+}
+
+.loading-msg {
+  font-size: 2.5em;
+  height: 100vh;
+  padding-top: 1em;
+}
+</style>
