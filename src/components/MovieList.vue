@@ -3,7 +3,13 @@
   <div class="movies">
     <div class="movie" v-for="movie in movies" :key="movie.id">
       <div class="poster">
-        <img :src="movie.poster">
+        <div v-if="posterExists(movie)">
+          <img :src="movie.poster">        
+        </div>
+        <div v-else>
+          <i class="fas fa-exclamation-circle"></i>
+          <p class="missing">Image not found</p>
+        </div>
         <div class="arrow"></div>
         <div v-if="isInWatchlist(movie)">
           <button class="sub-btn" @click="removeFromWatchlist(movie)"><i class="fas fa-minus-square"></i></button>
@@ -33,6 +39,12 @@ export default {
     movies: Array
   },
   methods: {
+    posterExists(movie) {
+      if (movie.poster == null) {
+        return false;
+      }
+      return true;
+    },
     isInWatchlist(movie) {
       for (let i = 0; i < this.$root.$data.watchlist.length; i++) {
         if (this.$root.$data.watchlist[i] === movie) {
@@ -71,7 +83,7 @@ export default {
 
 .movie {
   position: relative;
-  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.3);
   width: 14em;
   height: 27em;
   background-color: #373b69;
@@ -112,6 +124,33 @@ export default {
   right: 0;
   opacity: 0;
   transition: .5s ease;
+}
+
+.fa-exclamation-circle {
+  position: relative;
+  top: 0.35em;
+  font-size: 12em;
+  color: #595fab;
+}
+
+.missing {
+  position: relative;
+  top: 4em;
+  font-size: 1.3em;
+  color: #595fab;
+  font-weight: bold;
+}
+
+.poster:hover .fa-exclamation-circle {
+  opacity: 0.1;
+  transition: 0.5s ease;
+  backface-visibility: hidden;  
+}
+
+.poster:hover .missing {
+  opacity: 0.1;
+  transition: 0.5s ease;
+  backface-visibility: hidden; 
 }
 
 .poster:hover img {
@@ -171,16 +210,12 @@ export default {
   opacity: 0;
 }
 
-.poster:hover .add-tooltip {
-  opacity: 1;
-}
-
-.poster:hover .sub-tooltip {
-  opacity: 1;
-}
-
 .add-btn:hover{
   color: #2c7d58;
+}
+
+.add-btn:hover + .add-tooltip {
+  opacity: 1;
 }
 
 .add-btn:active {
@@ -192,6 +227,10 @@ export default {
 
 .sub-btn:hover{
   color: #c73636;
+}
+
+.sub-btn:hover + .sub-tooltip {
+  opacity: 1;
 }
 
 .sub-btn:active {

@@ -8,10 +8,16 @@ async function getMovies() {
   const resp = await fetch(URL);
   const respData = await resp.json();
 
-  console.log(respData);
+  //console.log(respData);
 
   respData.results.forEach(movie => {
-    movies.push({id:movie.id, title:movie.title, poster:IMGPATH + movie.poster_path, rating:movie.vote_average, overview:movie.overview});
+
+    var moviePosterPath = IMGPATH + movie.poster_path;
+    if (movie.poster_path == null) {
+      moviePosterPath = null;
+    }
+
+    movies.push({id:movie.id, title:movie.title, poster:moviePosterPath, rating:movie.vote_average, overview:movie.overview});
   });
 
   return respData;

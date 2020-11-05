@@ -22,6 +22,10 @@
       </router-link>
     </div>
     <router-view/>
+    <div class="footer-padding"></div>
+    <div class="footer">
+      <a href="https://github.com/IanKirkham/creativeproject3">View GitHub Repository</a>
+    </div>
   </div>
 </template>
 
@@ -47,6 +51,10 @@ export default {
   padding: 0;
 }
 
+body, html {
+  min-height: 100vh;
+}
+
 ::-webkit-scrollbar {
   width: 1em;
 }
@@ -67,6 +75,7 @@ export default {
   text-align: center;
   color: white;
   background-color: #22254b;
+  min-height: 100vh;
 }
 
 #nav {
@@ -112,4 +121,36 @@ i {
     vertical-align: 1.2em;
     margin-left: -0.9em; 
 }
+
+.footer-padding {
+  height: 7vh;
+}
+
+.footer {
+    display: flex;
+    width: 100%;
+    height: 7vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #101224;
+    box-shadow: 0px -4px 5px rgba(0, 0, 0, 0.2);
+    padding: 0.3em 0em;
+    position: fixed;
+    bottom: 0;
+  }
+  
+  .footer a {
+    margin: 0em 1em;
+    color: #ffffff;
+    font-size: 1em;
+    text-decoration: none;
+    border: 1px solid white;
+    border-radius: 0.25em;
+    padding: 0.2em;
+  }
+
+  .footer a:hover {
+    border: 1px solid #000000;
+    color: #000000;
+  }
 </style>

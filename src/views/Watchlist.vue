@@ -76,14 +76,8 @@ export default {
 </script>
 
 <style>
-
-.watchlist {
-  height: 110vh;
-}
-
 .empty-watchlist-msg {
   font-size: 2.5em;
-  height: 100vh;
   padding-top: 1em;
   color: #ababab;
   font-style: italic;
