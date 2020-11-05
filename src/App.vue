@@ -47,6 +47,19 @@ export default {
   padding: 0;
 }
 
+::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #161830;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: #595fab;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -62,6 +75,7 @@ export default {
   justify-content: flex-end;
   vertical-align: center;
   background-color: #373b69;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
 }
 
 #nav a {

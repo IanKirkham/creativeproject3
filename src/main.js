@@ -5,6 +5,7 @@ import apidata from './api-data.js'
 
 let data = {
   movies: apidata,
+  searched: [],
   watchlist: [],
 }
 

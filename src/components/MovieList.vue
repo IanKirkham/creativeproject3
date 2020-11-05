@@ -1,4 +1,3 @@
-
 <template>
 <div class="wrapper">
   <div class="movies">
@@ -6,8 +5,14 @@
       <div class="poster">
         <img :src="movie.poster">
         <div class="arrow"></div>
-        <button class="add-btn"  @click="addToWatchList(movie)"><i class="fas fa-plus-square"></i></button>
-        <div class="tooltip">Add to Watchlist</div>
+        <div v-if="isInWatchlist(movie)">
+          <button class="sub-btn" @click="removeFromWatchlist(movie)"><i class="fas fa-minus-square"></i></button>
+          <div class="sub-tooltip">Remove from Watchlist</div>
+        </div>
+        <div v-else>
+          <button class="add-btn"  @click="addToWatchList(movie)"><i class="fas fa-plus-square"></i></button>
+          <div class="add-tooltip">Add to Watchlist</div>
+        </div>
         <div class="overview">
           <p>{{movie.overview}}</p>
         </div>
@@ -28,8 +33,22 @@ export default {
     movies: Array
   },
   methods: {
+    isInWatchlist(movie) {
+      for (let i = 0; i < this.$root.$data.watchlist.length; i++) {
+        if (this.$root.$data.watchlist[i] === movie) {
+            return true;
+        }
+      }
+      return false;
+    },
     addToWatchList(movie) {
       this.$root.$data.watchlist.push(movie);
+    },
+    removeFromWatchlist(movie) {
+      const index = this.$root.$data.watchlist.findIndex(
+        (item) => item.id === movie.id
+      );
+      this.$root.$data.watchlist.splice(index, 1);
     }
   }
 }
@@ -48,7 +67,6 @@ export default {
   justify-content: space-around;
   align-items: center;
   margin-top: 2em;
-  max-width: 90%;
 }
 
 .movie {
@@ -57,8 +75,7 @@ export default {
   width: 14em;
   height: 27em;
   background-color: #373b69;
-  margin-bottom: 2em;
-  margin-right: 1em;
+  margin: 0em 1em 2em 1em;
 }
 
 .poster {
@@ -89,38 +106,12 @@ export default {
   position: absolute;
   max-height: 100%;
   overflow: auto;
-  top: 10%;
+  top: 12%;
   left: 0;
   bottom: 0;
   right: 0;
   opacity: 0;
   transition: .5s ease;
-}
-
-body::-webkit-scrollbar {
-  width: 1em;
-}
- 
-body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
- 
-body::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
-}
-
-.overview::-webkit-scrollbar {
-  width: 1em;
-}
- 
-.overview::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
- 
-.overview::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
 }
 
 .poster:hover img {
@@ -146,18 +137,45 @@ body::-webkit-scrollbar-thumb {
   cursor: pointer;
 }
 
-.tooltip {
+.sub-btn {
+  position: absolute;
+  top: 6%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: transparent;
+  color: #f54242;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.add-tooltip {
   color: #42b983;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1em;
   padding: 1em;
   position: absolute;
-  top: -0.5em;
-  left: 1.8em;
+  top: -0.2em;
+  left: 2.1em;
   opacity: 0;
 }
 
-.poster:hover .tooltip {
+.sub-tooltip {
+  color: #f54242;
+  font-weight: bold;
+  font-size: 0.95em;
+  position: absolute;
+  top: 0.8em;
+  left: 3em;
+  opacity: 0;
+}
+
+.poster:hover .add-tooltip {
+  opacity: 1;
+}
+
+.poster:hover .sub-tooltip {
   opacity: 1;
 }
 
@@ -169,6 +187,17 @@ body::-webkit-scrollbar-thumb {
   color: #1b543a;
 }
 .add-btn:focus {
+  outline: none;
+}
+
+.sub-btn:hover{
+  color: #c73636;
+}
+
+.sub-btn:active {
+  color: #912a2a;
+}
+.sub-btn:focus {
   outline: none;
 }
 
