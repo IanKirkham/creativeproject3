@@ -47,18 +47,18 @@
 </template>
 
 <script>
-const APIKEY = "329a4b56c26b85fa8990bc016748b860";
+const APIKEY = '329a4b56c26b85fa8990bc016748b860';
 const SEARCHURL =
-  "https://api.themoviedb.org/3/search/movie?api_key=" +
+  'https://api.themoviedb.org/3/search/movie?api_key=' +
   APIKEY +
-  "&language=en-US&page=1&include_adult=false&query=";
-const IMGPATH = "https://image.tmdb.org/t/p/w1280";
+  '&language=en-US&page=1&include_adult=false&query=';
+const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
 
 export default {
-  name: "Search",
+  name: 'Search',
   data() {
     return {
-      searchTerm: "",
+      searchTerm: '',
     };
   },
   computed: {
@@ -83,7 +83,7 @@ export default {
     async getMovies() {
       this.$root.$data.searched = [];
 
-      if (this.searchTerm == "") {
+      if (this.searchTerm == '') {
         return;
       }
 
@@ -107,7 +107,7 @@ export default {
         });
       });
 
-      this.searchTerm = "";
+      this.searchTerm = '';
     },
     isInWatchlist(movie) {
       for (let i = 0; i < this.$root.$data.watchlist.length; i++) {
